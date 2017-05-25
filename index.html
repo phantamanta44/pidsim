@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="epoch.min.css">
+        <link rel="stylesheet" href="main.css">
+        <title>PID Simulator</title>
+    </head>
+    <body>
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="http://d3js.org/d3.v3.js"></script>
+        <script src="epoch.min.js"></script>
+        <script src="main.js"></script>
+        <div id="wrapper">
+            <div id="body">
+                <div id="left">
+                    <div class="in">
+                        <span>Kp =</span>
+                        <input type="number" id="kp" value="1">
+                    </div>
+                    <div class="in">
+                        <span>Ki =</span>
+                        <input type="number" id="ki" value="0">
+                    </div>
+                    <div class="in">
+                        <span>Kd =</span>
+                        <input type="number" id="kd" value="0">
+                    </div>
+                    <div class="in">
+                        <span>g(0) =</span>
+                        <input type="number" id="g0" value="0">
+                    </div>
+                    <div class="in">
+                        <span>&sigma; =</span>
+                        <input type="number" id="setpt" value="10">
+                    </div>
+                    <div class="in">
+                        <span>U =</span>
+                        <input type="number" id="loss" value="-0.2">
+                    </div>
+                    <div class="in">
+                        <span>&Delta;t = 0.1</span>
+                    </div>
+                    <div class="in">
+                        <span id="status"></span>
+                    </div>
+                </div>
+                <div id="right">
+                    <div id="output"></div>
+                </div>
+            </div>
+            <div id="footer">
+                &copy; 2017 Evan Geng
+            </div>
+        </div>
+    </body>
+</html>

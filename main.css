@@ -1,0 +1,41 @@
+* {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+}
+
+#wrapper {
+    width: 100vw; height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#body {
+    flex: 11;
+    display: flex;
+    flex-direction: row;
+}
+
+#footer {
+    flex: 1;
+}
+
+#left, #right, #footer {
+    padding: 24px;
+}
+
+#left {
+    flex: 1;
+}
+
+#right {
+    flex: 2;
+}
+
+.in {
+    margin-bottom: 6px;
+}
+
+#output {
+    height: 50%;
+    border: 1px solid #000000;
+}
