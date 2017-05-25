@@ -6,9 +6,10 @@ $(document).ready(function() {
     var cG0 = $("#g0");
     var cSP = $("#setpt");
     var cU = $("#loss");
+    var cUO = $("#offset");
     var cS = $("#status");
     var cTF = $("#tf");
-    var valid, kP, kI, kD, g0, sp, u, tf, t;
+    var valid, kP, kI, kD, g0, sp, u, uOff, tf, t;
 
     var data = [{
         label: "Setpoint",
@@ -57,6 +58,11 @@ $(document).ready(function() {
                 u = temp;
                 update = true;
             }
+            temp = parseFloat(cUO.val());
+            if (temp !== uOff) {
+                uOff = temp;
+                update = true;
+            }
             temp = parseFloat(cTF.val());
             if (temp !== tf) {
                 tf = temp;
@@ -84,7 +90,7 @@ $(document).ready(function() {
                 var integ = 0;
                 for (var j = 0; j < d.length; j++)
                     integ += 0.1 * (sp - d[j]);
-                d.push(d[i] + 0.1 * (kP * e + kI * integ + kD * (e - (sp - d[i - 1])) / 0.1 + u * d[i]));
+                d.push(d[i] + 0.1 * (kP * e + kI * integ + kD * (e - (sp - d[i - 1])) / 0.1 + u * d[i] + uOff));
             }
             data[1].values.length = 0;
             for (var i3 = 0; i3 < intervals; i3++)
@@ -103,6 +109,7 @@ $(document).ready(function() {
     cG0.bind("keyup mouseup", update);
     cSP.bind("keyup mouseup", update);
     cU.bind("keyup mouseup", update);
+    cUO.bind("keyup mouseup", update);
     cTF.bind("keyup mouseup", update);
 
 });

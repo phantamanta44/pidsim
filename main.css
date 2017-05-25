@@ -20,6 +20,7 @@
 }
 
 #left, #right, #footer {
+    position: relative;
     padding: 24px;
 }
 
@@ -33,6 +34,12 @@
 
 .in {
     margin-bottom: 6px;
+}
+
+#equation {
+    position: absolute;
+    bottom: 24px;
+    width: 90%;
 }
 
 .line {
