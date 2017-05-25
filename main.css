@@ -35,6 +35,11 @@
     margin-bottom: 6px;
 }
 
+.line {
+    fill: none;
+    stroke: #000000;
+}
+
 #output {
     height: 50%;
     border: 1px solid #000000;

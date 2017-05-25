@@ -7,7 +7,8 @@ $(document).ready(function() {
     var cSP = $("#setpt");
     var cU = $("#loss");
     var cS = $("#status");
-    var valid, kP, kI, kD, g0, sp, u, t;
+    var cTF = $("#tf");
+    var valid, kP, kI, kD, g0, sp, u, tf, t;
 
     var data = [{
         label: "Setpoint",
@@ -56,6 +57,11 @@ $(document).ready(function() {
                 u = temp;
                 update = true;
             }
+            temp = parseFloat(cTF.val());
+            if (temp !== tf) {
+                tf = temp;
+                update = true;
+            }
         } catch (e) {
             valid = false;
             console.log(e);
@@ -65,18 +71,23 @@ $(document).ready(function() {
         else
             cS.text("");
         if (update) {
-            for (var i2 = 0; i2 < 101; i2++)
+            var intervals = tf * 10 + 1;
+            if (intervals < 2)
+                intervals = 2;
+            data[0].values.length = 0;
+            for (var i2 = 0; i2 < intervals; i2++)
                 data[0].values[i2] = {x: i2 * 0.1, y: sp};
             var ei = sp - g0;
             var d = [g0, g0 + kP * ei + kI * ei + u * g0];
-            for (var i = 1; i < 100; i++) {
+            for (var i = 1; i < intervals - 1; i++) {
                 var e = sp - d[i];
                 var integ = 0;
                 for (var j = 0; j < d.length; j++)
-                    integ += sp - d[j];
-                d.push(d[i] + kP * e + kI * integ + kD * (e - (sp - d[i - 1])) / 0.1 + u * d[i]);
+                    integ += 0.1 * (sp - d[j]);
+                d.push(d[i] + 0.1 * (kP * e + kI * integ + kD * (e - (sp - d[i - 1])) / 0.1 + u * d[i]));
             }
-            for (var i3 = 0; i3 < 101; i3++)
+            data[1].values.length = 0;
+            for (var i3 = 0; i3 < intervals; i3++)
                 data[1].values[i3] = {x: i3 * 0.1, y: d[i3]};
             console.log(data);
             chart.update(data);
@@ -92,5 +103,6 @@ $(document).ready(function() {
     cG0.bind("keyup mouseup", update);
     cSP.bind("keyup mouseup", update);
     cU.bind("keyup mouseup", update);
+    cTF.bind("keyup mouseup", update);
 
 });
